@@ -1,44 +1,34 @@
-from collections import defaultdict 
-  
-MAX_CHARS = 256
-   
-def findSubString(strr): 
-      
-    n = len(strr) 
-      
-    dist_count = len(set([x for x in strr])) 
-      
-    curr_count = defaultdict(lambda: 0) 
-    count = 0
-    start = 0
-    min_len = n 
+from collections import defaultdict
+
+def fun1():
+    return 0
+
+def subs(s):
+    n=len(s)
+    x=len(set(list(s)))
+    d=defaultdict(fun1)
+    c=0
+    low=0
+    high=n
+    y=-1
+
+    for j in range(n):
+        d[s[j]]=d[s[j]]+1
+        if d[s[j]]==1:
+            c=c+1
+        if c==x:
+            while d[s[low]]>1:
+                if d[s[low]]>1:
+                    d[s[low]]=d[s[low]]-1
+                low=low+1
+
+            y=j-low+1
+            if high>y:
+                high=y
+                z=low
+
+    return len(str(s[z:z+high]))
 
 
-    for j in range(n): 
-        curr_count[strr[j]] += 1
-          
-        if curr_count[strr[j]] == 1: 
-            count += 1
-              
-              
-        if count == dist_count: 
-            while curr_count[strr[start]] > 1: 
-                if curr_count[strr[start]] > 1: 
-                    curr_count[strr[start]] -= 1
-                      
-                start += 1
-                   
-            len_window = j - start + 1
-              
-            if min_len > len_window: 
-                min_len = len_window 
-                start_index = start 
-  
-    return str(strr[start_index: start_index +
-                                 min_len]) 
-                                   
-if __name__=='__main__': 
-
-    st=input()  
-    ans=findSubString(st)
-    print(len(ans))
+s=input()
+print(subs(s))
